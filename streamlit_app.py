@@ -134,7 +134,14 @@ def main():
             col1, col2 = st.columns(2)
 
             with col1:
-                st.subheader("Buy Scenario")
+                st.markdown(
+                    """<h3 style='
+                        color: #4ade80;
+                        margin-bottom: 10px;
+                        font-size: 24px;
+                    '>Buy Scenario</h3>""",
+                    unsafe_allow_html=True
+                )
                 st.markdown(
                     f"""<div style='
                                     background-color: #fef9c3; 
@@ -155,7 +162,14 @@ def main():
                 st.metric("Total Monthly Cash Flow", f"₪{buy_results['total_monthly_cashflow']:,.0f}")
 
             with col2:
-                st.subheader("Rent Scenario")
+                st.markdown(
+                    """<h3 style='
+                        color: #fb923c;
+                        margin-bottom: 10px;
+                        font-size: 24px;
+                    '>Rent Scenario</h3>""",
+                    unsafe_allow_html=True
+                )
                 st.markdown(
                     f"""<div style='
                                     background-color: #fef9c3; 
