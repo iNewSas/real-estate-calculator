@@ -67,7 +67,7 @@ def main():
             format="%d"
         )
         annual_appreciation_rate = st.number_input(
-            "שיעור עליית ערך הנכס בחישוב  שנתי (%)",
+            "שיעור עליית ערך הנכס בחישוב ממוצע שנתי (%)",
             value=3.5,
             step=0.1,
             format="%.1f"
@@ -114,7 +114,7 @@ def main():
             value=10
         )
         central_rent = st.number_input(
-            "שכר דירה נוכחי על דירת מהמגורים במרכז (₪)",
+            "שכר דירה נוכחי על דירת המגורים במרכז (₪)",
             value=7000,
             step=100,
             format="%d"
@@ -191,7 +191,7 @@ def main():
                     </div>""",
                     unsafe_allow_html=True
                 )
-                st.metric("הכנסה חודשית נטו", f"₪{buy_results['monthly_net_income']:,.0f}")
+                st.metric("הכנ/הוצ' חודשית נטו", f"₪{buy_results['monthly_net_income']:,.0f}")
                 st.metric("תזרים מזומנים חודשי", f"₪{buy_results['total_monthly_cashflow']:,.0f}")
 
             with col2:
@@ -231,7 +231,7 @@ def main():
             risk_scenarios['תרחיש שוק'] = risk_scenarios['תרחיש שוק'].replace({
                 'Base Case': 'תרחיש בסיס',
                 'Market Crash': 'קריסת שוק',
-                'Stagnant Market': 'שוק מקורקע',
+                'Stagnant Market': 'שוק מתון',
                 'Strong Market': 'שוק חזק'
             })
             risk_scenarios['רמת סיכון'] = risk_scenarios['רמת סיכון'].replace({
@@ -240,6 +240,60 @@ def main():
                 'High': 'גבוה'
             })
             st.dataframe(risk_scenarios)
+
+            # Year by Year Analysis
+            st.subheader("ניתוח שנה אחר שנה")
+            years_df = pd.DataFrame()
+            for year in range(analysis.years + 1):
+                # Store original years value
+                original_years = analysis.years
+                analysis.years = year
+
+                # Get results for both scenarios
+                buy_results = analysis.calculate_buy_scenario(show_real_values=False)
+                rent_results = analysis.calculate_rent_scenario(show_real_values=False)
+
+                # Get mortgage breakdown
+                mortgage_breakdown = buy_results.get('mortgage_breakdown', {})
+                total_remaining_mortgage = (mortgage_breakdown.get('fixed_balance', 0) +
+                                            mortgage_breakdown.get('variable_balance', 0))
+
+                # Add to dataframe
+                years_df = pd.concat([years_df, pd.DataFrame({
+                    'שנה': [year],
+                    'שווי הנכס': [buy_results['property_value']],
+                    'יתרת משכנתא': [total_remaining_mortgage],
+                    'שווי נכסי נטו - רכישה': [buy_results['nav']],
+                    'שווי נכסי נטו - שכירות': [rent_results['nav']],
+                    'הפרש': [buy_results['nav'] - rent_results['nav']]
+                })])
+
+                # Restore original years
+                analysis.years = original_years
+
+            # Format as currency and display
+            st.markdown("""
+                        <style>
+                            .dataframe {
+                                direction: rtl;
+                                text-align: right;
+                            }
+                            .dataframe th {
+                                text-align: right !important;
+                            }
+                        </style>
+                    """, unsafe_allow_html=True)
+
+            # Format numbers with ₪ and thousands separator
+            formatted_df = years_df.set_index('שנה').style.format({
+                'שווי הנכס': lambda x: f'₪{x:,.0f}',
+                'יתרת משכנתא': lambda x: f'₪{x:,.0f}',
+                'שווי נכסי נטו - רכישה': lambda x: f'₪{x:,.0f}',
+                'שווי נכסי נטו - שכירות': lambda x: f'₪{x:,.0f}',
+                'הפרש': lambda x: f'₪{x:,.0f}'
+            })
+
+            st.dataframe(formatted_df)
 
         except Exception as e:
             st.error(f"אירעה שגיאה: {str(e)}")
