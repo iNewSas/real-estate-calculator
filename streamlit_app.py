@@ -136,8 +136,18 @@ def main():
             with col1:
                 st.subheader("Buy Scenario")
                 st.markdown(
-                    f"""<div style='background-color: #fef9c3; padding: 10px; border-radius: 5px;'>
-                                Net Asset Value: ₪{buy_results['nav']:,.0f}
+                    f"""<div style='
+                                    background-color: #fef9c3; 
+                                    padding: 15px; 
+                                    border-radius: 10px; 
+                                    color: #000000;
+                                    font-weight: bold;
+                                    font-size: 18px;
+                                    margin: 10px 0;
+                                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                                '>
+                                    Net Asset Value:<br/>
+                                    <span style='font-size: 24px;'>₪{buy_results['nav']:,.0f}</span>
                                 </div>""",
                     unsafe_allow_html=True
                 )
@@ -147,8 +157,18 @@ def main():
             with col2:
                 st.subheader("Rent Scenario")
                 st.markdown(
-                    f"""<div style='background-color: #fef9c3; padding: 10px; border-radius: 5px;'>
-                                Net Asset Value: ₪{rent_results['nav']:,.0f}
+                    f"""<div style='
+                                    background-color: #fef9c3; 
+                                    padding: 15px; 
+                                    border-radius: 10px; 
+                                    color: #000000;
+                                    font-weight: bold;
+                                    font-size: 18px;
+                                    margin: 10px 0;
+                                    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+                                '>
+                                    Net Asset Value:<br/>
+                                    <span style='font-size: 24px;'>₪{rent_results['nav']:,.0f}</span>
                                 </div>""",
                     unsafe_allow_html=True
                 )
