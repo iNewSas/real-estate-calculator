@@ -10,6 +10,7 @@ st.set_page_config(
 )
 
 # Add RTL support with custom CSS
+# Add this to your CSS section at the top of streamlit_app.py
 st.markdown("""
     <style>
         .element-container, .stMarkdown, .stButton, .stText, .stNumberInput {
@@ -18,6 +19,22 @@ st.markdown("""
         }
         .stMarkdown h1, .stMarkdown h2, .stMarkdown h3 {
             text-align: right;
+        }
+        /* Fix slider container */
+        .stSlider {
+            direction: ltr !important;  /* Keep slider direction left-to-right */
+            padding: 1rem 0;  /* Add some padding */
+        }
+        /* Fix slider label */
+        .stSlider > label {
+            direction: rtl !important;
+            text-align: right !important;
+            display: block !important;
+            width: 100% !important;
+        }
+        /* Adjust slider width */
+        .stSlider > div > div {
+            width: 100% !important;
         }
     </style>
 """, unsafe_allow_html=True)
