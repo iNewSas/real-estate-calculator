@@ -4,7 +4,6 @@ import streamlit as st
 import pandas as pd  # Add this line
 from calculator import RealEstateInvestmentAnalysis
 
-# At the start of your streamlit_app.py
 st.set_page_config(
     page_title="Real Estate Investment Calculator",
     page_icon="🏠",
@@ -12,7 +11,7 @@ st.set_page_config(
     initial_sidebar_state="collapsed"
 )
 
-# Add a professional header
+# Now we can add the header
 st.markdown("""
     <div style='text-align: center; padding: 20px;'>
         <h1>Real Estate Investment Calculator</h1>
