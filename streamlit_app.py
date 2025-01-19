@@ -135,13 +135,23 @@ def main():
 
             with col1:
                 st.subheader("Buy Scenario")
-                st.metric("Net Asset Value", f"₪{buy_results['nav']:,.0f}")
+                st.markdown(
+                    f"""<div style='background-color: #fef9c3; padding: 10px; border-radius: 5px;'>
+                                Net Asset Value: ₪{buy_results['nav']:,.0f}
+                                </div>""",
+                    unsafe_allow_html=True
+                )
                 st.metric("Monthly Net Income", f"₪{buy_results['monthly_net_income']:,.0f}")
                 st.metric("Total Monthly Cash Flow", f"₪{buy_results['total_monthly_cashflow']:,.0f}")
 
             with col2:
                 st.subheader("Rent Scenario")
-                st.metric("Net Asset Value", f"₪{rent_results['nav']:,.0f}")
+                st.markdown(
+                    f"""<div style='background-color: #fef9c3; padding: 10px; border-radius: 5px;'>
+                                Net Asset Value: ₪{rent_results['nav']:,.0f}
+                                </div>""",
+                    unsafe_allow_html=True
+                )
                 st.metric("Total Monthly Cash Flow", f"₪{rent_results['total_monthly_cashflow']:,.0f}")
 
             # Risk Analysis
