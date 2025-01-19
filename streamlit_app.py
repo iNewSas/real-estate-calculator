@@ -43,7 +43,7 @@ st.markdown("""
 def main():
     st.title("מחשבון השקעות נדל\"ן")
 
-    # Add description with proper RTL styling
+    # Add description with explicit color and visibility settings
     st.markdown("""
         <div style='
             direction: rtl;
@@ -53,12 +53,19 @@ def main():
             border-right: 4px solid #4ade80;
             background-color: #f8fafc;
             border-radius: 5px;
+            color: #1f2937;  /* Dark gray color for text */
+            font-size: 16px;
+            opacity: 1;
+            display: block;
+            visibility: visible;
+            line-height: 1.6;
         '>
             מחשבון זה משמש לצורך חישוב והשוואה בין שתי אלטרנטיבות.<br><br>
             האחת השכרת דירה במרכז וחסכון חודשי קבוע לאורך תקופת ההשקעה והשני המשך שכירת דירה במרכז אך רכישת נכס נדלן במקביל בפריפריה.<br><br>
             המחשבון משווה מה קורה להון העצמי במהלך 10 השנים הראשונות ומשווה בין החלופות.
         </div>
     """, unsafe_allow_html=True)
+
 
     # Create columns for better layout
     col1, col2 = st.columns(2)
