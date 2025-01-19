@@ -55,7 +55,7 @@ def main():
             format="%d"
         )
         down_payment_percent = st.slider(
-            "הון עצמי (%)",
+            "הון עצמי המושקע בנכס(%)",
             min_value=0,
             max_value=100,
             value=25
@@ -67,7 +67,7 @@ def main():
             format="%d"
         )
         annual_appreciation_rate = st.number_input(
-            "שיעור עליית ערך שנתי (%)",
+            "שיעור עליית ערך הנכס בחישוב  שנתי (%)",
             value=3.5,
             step=0.1,
             format="%.1f"
@@ -87,13 +87,13 @@ def main():
             value=30
         )
         fixed_rate = st.number_input(
-            "שיעור הריבית הקבועה (%)",
+            "שיעור הריבית על המשכנתא בריבית קבועה (%)",
             value=5.0,
             step=0.1,
             format="%.1f"
         )
         variable_rate = st.number_input(
-            "שיעור הריבית המשתנה (%)",
+            "שיעור הריבית על המשכנתא בריבית המשתנה (%)",
             value=4.5,
             step=0.1,
             format="%.1f"
@@ -114,7 +114,7 @@ def main():
             value=10
         )
         central_rent = st.number_input(
-            "שכר דירה נוכחי במרכז (₪)",
+            "שכר דירה נוכחי על דירת מהמגורים במרכז (₪)",
             value=7000,
             step=100,
             format="%d"
@@ -126,13 +126,13 @@ def main():
             format="%d"
         )
         savings_return_rate = st.number_input(
-            "תשואה צפויה על השקעות (%)",
+            "תשואה צפויה על השקעות של ההון העצמי והחסכון החודשי(%)",
             value=7.5,
             step=0.1,
             format="%.1f"
         )
         inflation_rate = st.number_input(
-            "שיעור אינפלציה (%)",
+            "שיעור אינפלציה שנתי ממוצע משוער(%)",
             value=2.0,
             step=0.1,
             format="%.1f"
