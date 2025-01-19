@@ -1,6 +1,8 @@
 import streamlit as st
 from calculator import RealEstateInvestmentAnalysis
-
+import streamlit as st
+import pandas as pd  # Add this line
+from calculator import RealEstateInvestmentAnalysis
 
 def main():
     st.title("Real Estate Investment Calculator")
@@ -146,6 +148,38 @@ def main():
             st.subheader("Risk Analysis")
             risk_scenarios = analysis.generate_risk_scenarios()
             st.dataframe(risk_scenarios)
+
+            # Add Year by Year Analysis
+            st.subheader("Year by Year Analysis")
+            years_df = pd.DataFrame()
+            for year in range(analysis.years + 1):
+                # Store original years value
+                original_years = analysis.years
+                analysis.years = year
+
+                # Get results for both scenarios
+                buy_results = analysis.calculate_buy_scenario(show_real_values=False)
+                rent_results = analysis.calculate_rent_scenario(show_real_values=False)
+
+                # Get mortgage breakdown
+                mortgage_breakdown = buy_results.get('mortgage_breakdown', {})
+                total_remaining_mortgage = (mortgage_breakdown.get('fixed_balance', 0) +
+                                            mortgage_breakdown.get('variable_balance', 0))
+
+                # Add to dataframe
+                years_df = pd.concat([years_df, pd.DataFrame({
+                    'Year': [year],
+                    'Property Value': [buy_results['property_value']],
+                    'Remaining Mortgage': [total_remaining_mortgage],
+                    'Buy NAV': [buy_results['nav']],
+                    'Rent NAV': [rent_results['nav']],
+                    'NAV Difference': [buy_results['nav'] - rent_results['nav']]
+                })])
+
+                # Restore original years
+                analysis.years = original_years
+
+            st.dataframe(years_df.set_index('Year').style.format("₪{:,.0f}"))
 
         except Exception as e:
             st.error(f"An error occurred: {str(e)}")
