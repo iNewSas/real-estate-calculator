@@ -2,7 +2,12 @@ import streamlit as st
 import pandas as pd  # Add this line
 from calculator import RealEstateInvestmentAnalysis
 
-
+st.set_page_config(
+    page_title="Real Estate Investment Calculator",
+    page_icon="🏠",
+    layout="wide",
+    initial_sidebar_state="collapsed"
+)
 def main():
     st.title("Real Estate Investment Calculator")
 
@@ -229,9 +234,5 @@ def main():
 
 
 if __name__ == "__main__":
-    st.set_page_config(
-        page_title="Real Estate Calculator",
-        layout="wide",
-        initial_sidebar_state="collapsed"
-    )
+
     main()
