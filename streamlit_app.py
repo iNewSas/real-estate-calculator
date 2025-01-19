@@ -49,7 +49,7 @@ def main():
     with col1:
         st.subheader("פרטי הנכס")
         property_value = st.number_input(
-            "שווי הנכס (₪)",
+            "שווי הנכס בקנייה (₪)",
             value=900000,
             step=10000,
             format="%d"
@@ -61,7 +61,7 @@ def main():
             value=25
         )
         rental_income = st.number_input(
-            "הכנסה חודשית משכירות (₪)",
+            "הכנסה חודשית מהשכרת הנכס (₪)",
             value=3500,
             step=100,
             format="%d"
@@ -81,19 +81,19 @@ def main():
             value=30
         )
         fixed_portion = st.slider(
-            "אחוז ריבית קבועה (%)",
+            "אחוז המשכנתא בריבית קבועה (%)",
             min_value=0,
             max_value=100,
             value=30
         )
         fixed_rate = st.number_input(
-            "ריבית קבועה (%)",
+            "שיעור הריבית הקבועה (%)",
             value=5.0,
             step=0.1,
             format="%.1f"
         )
         variable_rate = st.number_input(
-            "ריבית משתנה (%)",
+            "שיעור הריבית המשתנה (%)",
             value=4.5,
             step=0.1,
             format="%.1f"
@@ -120,7 +120,7 @@ def main():
             format="%d"
         )
         monthly_savings = st.number_input(
-            "יכולת חיסכון חודשית (₪)",
+            "סכום ההפרשה לחיסכון חודשי (₪)",
             value=0,
             step=100,
             format="%d"
